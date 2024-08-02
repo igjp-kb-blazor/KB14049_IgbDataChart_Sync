@@ -1,0 +1,64 @@
+﻿<h4>Chart 1</h4>
+<IgbDataChart Width="100%"
+              Height="300px"
+              @ref="chart1"
+              WindowRect="(new Rect(0, 0, 0.5, 0.75))"
+              SyncChannel="_syncChannel"
+              IsHorizontalZoomEnabled="true"
+              IsVerticalZoomEnabled="true"
+              VerticalViewScrollbarMode="SeriesViewerScrollbarMode.Persistent"
+              HorizontalViewScrollbarMode="SeriesViewerScrollbarMode.Persistent"
+              ComputedPlotAreaMarginMode="ComputedPlotAreaMarginMode.Series">
+    <IgbCategoryXAxis Name="xAxis"
+                      DataSource="_data"
+                      Label="@nameof(DataItem.Index)"
+                      MajorStroke="1">
+    </IgbCategoryXAxis>
+    <IgbNumericYAxis Name="yAxis" MinimumValue="10" MaximumValue="16" Interval="1"></IgbNumericYAxis>
+    <IgbLineSeries Title="Sample Data"
+                   DataSource="_data"
+                   XAxisName="xAxis"
+                   YAxisName="yAxis" Brush="red" Thickness="4" MarkerOutline="red" MarkerThickness="4"
+                   ValueMemberPath="@nameof(DataItem.Value)">
+    </IgbLineSeries>
+</IgbDataChart>
+@code {
+    private IgbDataChart? chart1;
+    public class DataItem
+    {
+        public int Index { get; set; }
+        public double? Value { get; set; }
+    }
+
+    private List<DataItem> _data = new()
+    {
+        new() { Index = 0, Value = 12 },
+        new() { Index = 1, Value = 14 },
+        new() { Index = 2, Value = 11 },
+        new() { Index = 3, Value = 13 },
+        new() { Index = 4, Value = 15 },
+        new() { Index = 5, Value = 12 },
+        new() { Index = 6, Value = 14 },
+        new() { Index = 7, Value = 10 },
+        new() { Index = 8, Value = 12 },
+        new() { Index = 9, Value = 13 },
+        new() { Index = 10, Value = 12 },
+        new() { Index = 11, Value = 11 },
+        new() { Index = 12, Value = 14 },
+        new() { Index = 13, Value = 15 },
+        new() { Index = 14, Value = 10 },
+        new() { Index = 15, Value = 12 },
+        new() { Index = 16, Value = 13 },
+        new() { Index = 17, Value = 11 },
+        new() { Index = 18, Value = 14 },
+        new() { Index = 19, Value = 15 },
+        new() { Index = 20, Value = 12 }
+    };
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            this.StateHasChanged();
+        }
+    }
+}
